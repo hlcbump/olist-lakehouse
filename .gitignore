@@ -1,0 +1,18 @@
+# Dataset CSVs (baixados do kaggle, não commitados)
+data/
+
+# Databricks
+.databricks/
+*.pyc
+__pycache__/
+
+# Environment
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
