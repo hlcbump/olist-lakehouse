@@ -10,6 +10,11 @@
 
 # COMMAND ----------
 
+
+from pyspark.sql.functions import col, min, max
+
+# COMMAND ----------
+
 results = []
 
 def check(name, passed, detail=""):
@@ -66,7 +71,7 @@ for table, columns in not_null_checks:
 
 # COMMAND ----------
 
-from pyspark.sql.functions import col, min, max
+
 
 df_reviews = spark.table("workspace.olist_silver.reviews")
 min_score = df_reviews.select(min("review_score")).first()[0]
