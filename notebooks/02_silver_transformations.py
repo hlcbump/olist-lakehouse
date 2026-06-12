@@ -15,7 +15,7 @@
 # COMMAND ----------
 
 from pyspark.sql.functions import (
-    col, to_timestamp, datediff, when, trim, initcap, upper,
+    col, to_timestamp, try_to_timestamp, datediff, when, trim, initcap, upper,
     lower, coalesce, lit, current_timestamp, row_number
 )
 from pyspark.sql.window import Window
@@ -161,8 +161,8 @@ df_reviews = (
     .withColumn("review_comment_message",
                 coalesce(col("review_comment_message"), lit(""))
                 )
-    .withColumn("review_creation_date", to_timestamp("review_creation_date"))
-    .withColumn("review_answer_timestamp", to_timestamp("review_answer_timestamp"))
+    .withColumn("review_creation_date", try_to_timestamp("review_creation_date"))
+    .withColumn("review_answer_timestamp", try_to_timestamp("review_answer_timestamp"))
     .drop("_ingestion_timestamp")
     .withColumn("_ingestion_timestamp", current_timestamp())
 )
