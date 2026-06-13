@@ -157,6 +157,9 @@ df_reviews = (
     .withColumn("rn", row_number().over(w))
     .filter(col("rn") == 1)
     .drop("rn")
+    .filter(col("order_id").isNotNull())
+    .filter(col("review_score").isNotNull())
+    .filter((col("review_score") >= 1) & (col("review_score") <= 5))
     .withColumn("review_score", col("review_score").cast("int"))
     .withColumn("review_comment_message",
                 coalesce(col("review_comment_message"), lit(""))
