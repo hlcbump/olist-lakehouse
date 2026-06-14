@@ -95,7 +95,7 @@ df_fct = spark.table("workspace.olist_gold.fct_orders")
 # agregado mensal de vendas
 agg_monthly = (
     df_fct
-    .withColumn("month", date_trunc("month", "order_purchase_timestamp"))
+    .withColumn("month", date_trunc("month", "order_purchase_timestamp").cast("date"))
     .groupBy("month")
     .agg(
         countDistinct("order_id").alias("total_orders"),
